@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load bootstrap4 %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static "DeepFeaturesApp/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "spinkit/spinkit.css" %}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.2/minty/bootstrap.min.css" rel="stylesheet" integrity="sha384-GIcXw8rYyx4xrVfccSt7E7KGw2nAFDG/TNLq9NMPHKH5Rv3aqk6laThLgQFQnIYF" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="{% static "DeepFeaturesApp/main.js" %}"></script>
+    <title>Deep Images Generator</title>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h5 id="layer-title">block1_conv2</h5>
+                    <h7 id="layer-params">(224, 224, 64) 36928 params</h7>
+                    <div class="nn-shape conv"></div>
+                    <div id="conv1" class="nn-shape selectable"></div>
+                    <div id="connector1" class="nn-shape connector"></div>
+                    <div id="conv2" class="nn-shape selectable selected"></div>
+                    <div id="connector2" class="nn-shape connector"></div>
+                    <div id="pool3" class="nn-shape selectable pool"></div>
+                    <div id="connector3" class="nn-shape connector"></div>
+                    <div id="conv4" class="nn-shape selectable"></div>
+                    <div id="connector4" class="nn-shape connector"></div>
+                    <div id="conv5" class="nn-shape selectable"></div>
+                    <div id="connector5" class="nn-shape connector"></div>
+                    <div id="pool6" class="nn-shape selectable pool"></div>
+                    <div id="connector6" class="nn-shape connector"></div>
+                    <div id="conv7" class="nn-shape selectable"></div>
+                    <div id="connector7" class="nn-shape connector"></div>
+                    <div id="conv8" class="nn-shape selectable"></div>
+                    <div id="connector8" class="nn-shape connector"></div>
+                    <div id="conv9" class="nn-shape selectable"></div>
+                    <div id="connector9" class="nn-shape connector"></div>
+                    <div id="pool10" class="nn-shape selectable pool"></div>
+                    <div id="connector10" class="nn-shape connector"></div>
+                    <div id="conv11" class="nn-shape selectable"></div>
+                    <div id="connector11" class="nn-shape connector"></div>
+                    <div id="conv12" class="nn-shape selectable"></div>
+                    <div id="connector12" class="nn-shape connector"></div>
+                    <div id="conv13" class="nn-shape selectable"></div>
+                    <div id="connector13" class="nn-shape connector"></div>
+                    <div id="pool14" class="nn-shape selectable pool"></div>
+                    <div id="connector14" class="nn-shape connector"></div>
+                    <div id="conv15" class="nn-shape selectable"></div>
+                    <div id="connector15" class="nn-shape connector"></div>
+                    <div id="conv16" class="nn-shape selectable"></div>
+                    <div id="connector16" class="nn-shape connector"></div>
+                    <div id="conv17" class="nn-shape selectable"></div>
+                    <div id="connector17" class="nn-shape connector"></div>
+                    <div id="pool18" class="nn-shape selectable pool"></div>
+                    <div id="connector18" class="nn-shape connector"></div>
+                    <div id="flatten19" class="nn-shape selectable flatten"></div>
+                    <div id="connector19" class="nn-shape connector"></div>
+                    <div id="flat20" class="nn-shape selectable flat"></div>
+                    <div id="connector20" class="nn-shape connector"></div>
+                    <div id="flat21" class="nn-shape selectable flat"></div>
+                    <div id="connector21" class="nn-shape connector"></div>
+                    <div id="flat22" class="nn-shape selectable"></div>
+                </div>
+                <div class="col-6">
+                    {% if image_path %}
+                        <div id="loading-container">
+                            <div id="loading-icon" class="sk-double-bounce">
+                                <div class="sk-child sk-double-bounce1"></div>
+                                <div class="sk-child sk-double-bounce2"></div>
+                            </div>
+                        </div>
+                        <img id="image-art" class="image-art mb-3 mt-3 rounded centered" rawsrc="/static/DeepFeaturesApp/Images/{{ image_path }}" src="" width="224px" height="224px" hidden="hidden"/>
+                    {% else %}
+                        <h3 class="text-center">Welcome to Deep Feature Visualizations</h3>
+                        <h6 class="text-center">Edit the parameters to get started</h6>
+                    {% endif %}
+                    <form id="image-gen-form" action="/" method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                            {% buttons %}
+                                <button type="submit" class="btn btn-primary">Make Image</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Choose Source Image</button>
+                            {% endbuttons %}
+                    </form>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Choose Custom Image</h4>
+                            </div>
+                            <div class="modal-body">
+                                <img id="custom-image-preview" src="{% static "DeepFeaturesApp/pineapple.jpg" %}" class="image-art preview-image"/>
+                                <form action="/customImage" enctype="multipart/form-data" method="post">
+                                    {% csrf_token %}
+                                    <div>
+                                        <label class="btn btn-primary change-image-button" >
+                                            Browse <input name="custom-image" id="custom-image-input" type="file" hidden>
+                                        </label>
+                                        <button type="submit" class="btn btn-default change-image-button" disabled="true" id="save-custom-image">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
