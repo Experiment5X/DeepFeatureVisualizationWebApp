@@ -315,3 +315,27 @@
     color: dodgerblue;
     font-weight: bold;
 }
+
+.preview {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    display: block;
+    height: 150px;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.previous-preview {
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 90px;
+    border-radius: 50%;
+    border: 3px solid #FFFFFF;
+    width: 75px;
+    height: 75px;
+}
+
+.history-card {
+    margin-top: 15px;
+}

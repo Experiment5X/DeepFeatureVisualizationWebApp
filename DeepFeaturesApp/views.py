@@ -4,6 +4,7 @@ from django.views.generic import FormView
 from django.shortcuts import render
 from .forms import DeepFeatureForm
 from . import feature_creations
+from .layer_info import prepare_histories
 import os
 import cv2
 
@@ -18,7 +19,12 @@ class ArtGenView(FormView):
 
     def get(self, request):
         form = DeepFeatureForm()
-        return render(request, 'DeepFeaturesApp/index.html', {'form': form})
+        history = []
+        if 'history' in request.session:
+            history = request.session['history']
+
+        return render(request, 'DeepFeaturesApp/index.html', {'form': form,
+                                                              'history': prepare_histories(history)})
 
     def post(self, request):
         form = DeepFeatureForm(request.POST)
@@ -36,9 +42,10 @@ class ArtGenView(FormView):
             new_form = form
 
         if 'custom_image' in request.session:
-            start_image = cv2.resize(cv2.imread(request.session['custom_image']), (224, 224))
+            original_image_path = request.session['custom_image']
         else:
-            start_image = cv2.imread('./DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg')
+            original_image_path = './DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg'
+        start_image = cv2.resize(cv2.imread(original_image_path), (224, 224))
         # creator = ImageFeatureCreator()
         # feature_vector = creator.get_feature_vector(start_image, form.cleaned_data['layer_index'])
         # image = creator.create_from_features(feature_vector, form.cleaned_data['layer_index'],
@@ -51,6 +58,24 @@ class ArtGenView(FormView):
                                                    form.cleaned_data['layer_index'], form.cleaned_data['image_std_clip'],
                                                    form.cleaned_data['grad_std_clip'], form.cleaned_data['epoch_count'],
                                                    form.cleaned_data['total_variation'])
+
+        history = {
+            'filename': filename[17:],
+            'original': original_image_path[17:],
+            'params': form.data
+        }
+
+        if 'history' not in request.session:
+            request.session['history'] = []
+            print('Creating history list')
+
+        request.session['history'].append(history)
+        request.session.modified = True
+
+        print('Yoyoyo')
+        print(request.session['history'])
+        print(len(request.session['history']))
+
         global worker_thread_created
         if not worker_thread_created:
             worker_thread_created = True
@@ -61,7 +86,10 @@ class ArtGenView(FormView):
         feature_creations.images_to_make.put(params)
 
         image_name = os.path.basename(filename)
-        return render(request, 'DeepFeaturesApp/index.html', {'form': new_form, 'image_path': image_name})
+        return render(request, 'DeepFeaturesApp/index.html', {'form': new_form,
+                                                              'image_path': image_name,
+                                                              'history':
+                                                                  prepare_histories(request.session['history'][:-1])})
 
 
 def write_image(f):

@@ -109,7 +109,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-3">
+                    {% for hist in history %}
+                        <div class="card history-card">
+                            <div class="card-img-top">
+                                <div class="preview" style="background-image: url(&quot;{{ hist.filename }}&quot;)" alt="Previous feature visualization">
+                                    <img class="previous-preview" src="{{ hist.original }}">
+                                </div>
+                            </div>
+                            <div class="card-block">
+                                <h5 class="card-title">{{ hist.layer_info.name }}</h5>
+                                <a href="" class="btn btn-primary">Use Params</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

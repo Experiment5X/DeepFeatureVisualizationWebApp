@@ -121,8 +121,8 @@ class ImageFeatureCreator:
             if i == int(epochs * 0.9):
                 i /= 15
 
-            if verbose:
-                print('Epoch ' + str(i) + ': Loss = ' + str(l) + ': Total Variation: ' + str(total_var))
+            # if verbose:
+            #     print('Epoch ' + str(i) + ': Loss = ' + str(l) + ': Total Variation: ' + str(total_var))
 
         # normalize to between 0 and 255
         start_image -= start_image.min()
