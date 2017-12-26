@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="{% static "DeepFeaturesApp/main.js" %}"></script>
+    <script src="https://use.fontawesome.com/368970dc6b.js"></script>
     <title>Deep Images Generator</title>
 </head>
 <body>
@@ -118,8 +119,11 @@
                                 </div>
                             </div>
                             <div class="card-block">
-                                <h5 class="card-title">{{ hist.layer_info.name }}</h5>
-                                <a href="" class="btn btn-primary">Use Params</a>
+                                <h5 class="card-title d-inline">{{ hist.layer_info.name }}</h5>
+                                <!-- <a href="" class="btn btn-primary">Use Params</a> -->
+                                <span class="use-params float-right d-inline">
+                                    <i class="fa fa-mail-forward" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </div>
                     {% endfor %}
