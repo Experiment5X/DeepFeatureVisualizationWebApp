@@ -25,7 +25,7 @@ layer_info = [
 
 
 def prepare_history(hist):
-    layer_index = int(hist['params']['layer_index'])
+    layer_index = int(hist['params']['layer_index']) - 1
     cur_layer_info = layer_info[layer_index]
 
     hist['layer_info'] = {}
