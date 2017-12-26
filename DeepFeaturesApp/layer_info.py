@@ -37,4 +37,6 @@ def prepare_history(hist):
 
 
 def prepare_histories(histories):
-    return reversed([prepare_history(h) for h in histories])
+    histories = list(reversed([prepare_history(h) for h in histories]))
+    if len(histories) > 4:
+        return histories[:4]
