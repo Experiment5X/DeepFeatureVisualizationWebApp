@@ -7,7 +7,8 @@
 </head>
 <body>
     <div>
-        <div class="container">
+        {% include "DeepFeaturesApp/navbar.html" %}
+        <div class="container main-content">
             <div class="row">
                 <div class="col-3">
                     <h5 id="layer-title">block1_conv2</h5>
@@ -67,7 +68,7 @@
                         </div>
                         <img id="image-art" class="image-art mb-3 mt-3 rounded centered" rawsrc="/static/DeepFeaturesApp/Images/{{ image_path }}" src="" width="224px" height="224px" hidden="hidden"/>
                     {% else %}
-                        <h3 class="text-center">Welcome to Deep Feature Visualizations</h3>
+                        <h3 class="text-center">Create a Visualization</h3>
                         <h6 class="text-center">Edit the parameters to get started</h6>
                     {% endif %}
                     <form id="image-gen-form" action="/" method="post">
