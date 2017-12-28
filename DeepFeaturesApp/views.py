@@ -111,4 +111,4 @@ class HistoryView(TemplateView):
         if 'history' in request.session:
             history = request.session['history']
 
-        return render(request, 'DeepFeaturesApp/history.html', { 'history': prepare_histories(history)})
+        return render(request, 'DeepFeaturesApp/history.html', { 'history': prepare_histories(history, all=True)})
