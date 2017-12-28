@@ -357,3 +357,8 @@
     cursor: pointer;
 }
 
+.history-image {
+    border-radius: 5px;
+    width: 112px;
+    height: 112px;
+}

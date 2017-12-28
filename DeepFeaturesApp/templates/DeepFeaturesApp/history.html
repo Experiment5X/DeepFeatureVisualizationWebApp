@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load bootstrap4 %}
+<head>
+    {% include "DeepFeaturesApp/includes.html" %}
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <table class="table text-center">
+                    <thead class="thead-default">
+                    <tr>
+                        <th>Feature Image</th>
+                        <th>Original Image</th>
+                        <th>Layer</th>
+                        <th>Learning Rate</th>
+                        <th>Image Std Clip</th>
+                        <th>Gradient Std Clip</th>
+                        <th>Number of Epochs</th>
+                        <th>Total Variation Coefficient</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for hist in history %}
+                        <tr>
+                            <th scope="row" class="align-middle"><img class="history-image" src="{{ hist.filename }}"></th>
+                            <td class="align-middle"><img class="history-image" src="{{ hist.original }}"></td>
+                            <td class="align-middle">{{ hist.layer_info.name }}</td>
+                            <td class="align-middle">{{ hist.params.learning_rate }}</td>
+                            <td class="align-middle">{{ hist.params.image_std_clip }}</td>
+                            <td class="align-middle">{{ hist.params.grad_std_clip }}</td>
+                            <td class="align-middle">{{ hist.params.epoch_count }}</td>
+                            <td class="align-middle">{{ hist.params.total_variation }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>

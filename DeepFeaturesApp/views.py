@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from django.shortcuts import render
 from .forms import DeepFeatureForm
 from . import feature_creations
@@ -104,3 +104,14 @@ def custom_image(request):
     if request.method == 'POST':
         request.session['custom_image'] = write_image(request.FILES['custom-image'])
         return redirect('/')
+
+
+class HistoryView(TemplateView):
+    template_name = 'DeepFeaturesApp/history.html'
+
+    def get(self, request):
+        history = []
+        if 'history' in request.session:
+            history = request.session['history']
+
+        return render(request, 'DeepFeaturesApp/history.html', { 'history': prepare_histories(history)})
