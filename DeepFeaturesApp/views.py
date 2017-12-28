@@ -23,8 +23,11 @@ class ArtGenView(FormView):
         if 'history' in request.session:
             history = request.session['history']
 
+        layers_selected = [False] * 22
+        layers_selected[1] = True
         return render(request, 'DeepFeaturesApp/index.html', {'form': form,
-                                                              'history': prepare_histories(history)})
+                                                              'history': prepare_histories(history),
+                                                              'layers_selected': layers_selected})
 
     def post(self, request):
         form = DeepFeatureForm(request.POST)
@@ -46,18 +49,16 @@ class ArtGenView(FormView):
         else:
             original_image_path = './DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg'
         start_image = cv2.resize(cv2.imread(original_image_path), (224, 224))
-        # creator = ImageFeatureCreator()
-        # feature_vector = creator.get_feature_vector(start_image, form.cleaned_data['layer_index'])
-        # image = creator.create_from_features(feature_vector, form.cleaned_data['layer_index'],
-        #                                      form.cleaned_data['learning_rate'], form.cleaned_data['grad_std_clip'],
-        #                                      form.cleaned_data['image_std_clip'], form.cleaned_data['epoch_count'])
 
-        # cv2.imwrite('./DeepFeaturesApp/static/DeepFeaturesApp/image.png', image)
         filename = feature_creations.generate_image_name()
         params = feature_creations.ImageParameters(start_image, filename, form.cleaned_data['learning_rate'],
                                                    form.cleaned_data['layer_index'], form.cleaned_data['image_std_clip'],
                                                    form.cleaned_data['grad_std_clip'], form.cleaned_data['epoch_count'],
                                                    form.cleaned_data['total_variation'])
+
+        layer_index = int(form.cleaned_data['layer_index'])
+        layers_selected = [False] * 22 # one for each layer
+        layers_selected[layer_index - 1] = True
 
         history = {
             'filename': filename[17:],
@@ -67,14 +68,9 @@ class ArtGenView(FormView):
 
         if 'history' not in request.session:
             request.session['history'] = []
-            print('Creating history list')
 
         request.session['history'].append(history)
         request.session.modified = True
-
-        print('Yoyoyo')
-        print(request.session['history'])
-        print(len(request.session['history']))
 
         global worker_thread_created
         if not worker_thread_created:
@@ -89,7 +85,8 @@ class ArtGenView(FormView):
         return render(request, 'DeepFeaturesApp/index.html', {'form': new_form,
                                                               'image_path': image_name,
                                                               'history':
-                                                                  prepare_histories(request.session['history'][:-1])})
+                                                                  prepare_histories(request.session['history'][:-1]),
+                                                              'layers_selected': layers_selected})
 
 
 def write_image(f):
