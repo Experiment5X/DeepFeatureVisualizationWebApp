@@ -69,7 +69,7 @@
     margin-left: -1px;
 }
 
-#conv1 {
+#layer1 {
     width: 75px;
     height: 75px;
     margin-left: -38px;
@@ -80,7 +80,7 @@
     margin-top: 95px;
 }
 
-#conv2 {
+#layer2 {
     width: 75px;
     height: 75px;
     margin-left: -38px;
@@ -91,7 +91,7 @@
     margin-top: 185px;
 }
 
-#pool3 {
+#layer3 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
@@ -102,7 +102,7 @@
     margin-top: 237px;
 }
 
-#conv4 {
+#layer4 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
@@ -113,7 +113,7 @@
     margin-top: 289px;
 }
 
-#conv5 {
+#layer5 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
@@ -123,7 +123,7 @@
     margin-top: 341px;
 }
 
-#pool6 {
+#layer6 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
@@ -133,7 +133,7 @@
     margin-top: 384px;
 }
 
-#conv7 {
+#layer7 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
@@ -144,7 +144,7 @@
     margin-top: 427px;
 }
 
-#conv8 {
+#layer8 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
@@ -155,7 +155,7 @@
     margin-top: 470px;
 }
 
-#conv9 {
+#layer9 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
@@ -166,7 +166,7 @@
     margin-top: 513px;
 }
 
-#pool10 {
+#layer10 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
@@ -177,7 +177,7 @@
     margin-top: 548px;
 }
 
-#conv11 {
+#layer11 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
@@ -188,7 +188,7 @@
     margin-top: 583px;
 }
 
-#conv12 {
+#layer12 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
@@ -199,7 +199,7 @@
     margin-top: 618px;
 }
 
-#conv13 {
+#layer13 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
@@ -210,7 +210,7 @@
     margin-top: 653px;
 }
 
-#pool14 {
+#layer14 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
@@ -221,7 +221,7 @@
     margin-top: 682px;
 }
 
-#conv15 {
+#layer15 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
@@ -232,7 +232,7 @@
     margin-top: 711px;
 }
 
-#conv16 {
+#layer16 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
@@ -243,7 +243,7 @@
     margin-top: 740px;
 }
 
-#conv17 {
+#layer17 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
@@ -254,7 +254,7 @@
     margin-top: 769px;
 }
 
-#pool18 {
+#layer18 {
     width: 10px;
     height: 10px;
     margin-left: -5px;
@@ -265,7 +265,7 @@
     margin-top: 794px;
 }
 
-#flatten19 {
+#layer19 {
     width: 75px;
     height: 20px;
     margin-left: -38px;
@@ -276,7 +276,7 @@
     margin-top: 829px;
 }
 
-#flat20 {
+#layer20 {
     margin-top: 844px;
 }
 
@@ -284,7 +284,7 @@
     margin-top: 853px;
 }
 
-#flat21 {
+#layer21 {
     margin-top: 868px;
 }
 
@@ -292,7 +292,7 @@
     margin-top: 877px;
 }
 
-#flat22 {
+#layer22 {
     width: 50px;
     height: 9px;
     margin-left: -25px;
@@ -365,4 +365,9 @@
 
 .main-content {
     margin-top: 15px;
+}
+
+.shadow-primary {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(120,194,173,0.25);
+    box-shadow: 0 0 0 0.2rem rgba(120,194,173,0.25);
 }

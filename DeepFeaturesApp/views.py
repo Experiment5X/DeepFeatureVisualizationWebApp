@@ -7,6 +7,7 @@ from . import feature_creations
 from .layer_info import prepare_histories
 import os
 import cv2
+import json
 
 
 worker_thread_created = False
@@ -101,6 +102,15 @@ def custom_image(request):
     if request.method == 'POST':
         request.session['custom_image'] = write_image(request.FILES['custom-image'])
         return redirect('/')
+
+
+def history_params(request):
+    if request.method == 'GET':
+        history_index = int(request.GET.get('index', '0'))
+        hist_record = request.session['history'][history_index]
+
+        hist_json = json.dumps(hist_record['params'])
+        return HttpResponse(hist_json)
 
 
 class HistoryView(TemplateView):

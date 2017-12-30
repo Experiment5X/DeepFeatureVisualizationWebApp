@@ -63,6 +63,38 @@ $(document).ready(function() {
         $("#layer-params").text(params);
     });
 
+    $(".use-params").click(function (e) {
+        var cell = e.target.parentElement;
+
+        var historyIndex = parseInt($(cell).find("#index").get(0).value);
+        var historyIndexReverse = -historyIndex - 1;
+        $.ajax({
+            type: "GET",
+            url: "historyParams?index=" + historyIndexReverse.toString(),
+            success: function (data) {
+                console.log(data);
+                var history = JSON.parse(data);
+
+                $("#id_learning_rate").val(history.learning_rate);
+                $("#id_layer_index").val(history.layer_index);
+                $("#id_image_std_clip").val(history.image_std_clip);
+                $("#id_grad_std_clip").val(history.grad_std_clip);
+                $("#id_epoch_count").val(history.epoch_count);
+                $("#id_total_variation").val(history.total_variation);
+
+                // select the correct layer on the diagram
+                var layer_selector = "#layer" + history.layer_index;
+                $(".selectable").removeClass("selected");
+                $(layer_selector).addClass("selected");
+
+                $("#image-gen-form").find(".form-control").addClass("shadow-primary");
+                setTimeout(function() {
+                    $("#image-gen-form").find(".form-control").removeClass("shadow-primary");
+                }, 500);
+            }
+        });
+    });
+
     if ($("#image-art").length == 0)
         return;
 
