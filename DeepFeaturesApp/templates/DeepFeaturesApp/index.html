@@ -61,10 +61,14 @@
                 <div class="col-6">
                     {% if image_path %}
                         <div id="loading-container">
+                            <!--
                             <div id="loading-icon" class="sk-double-bounce">
                                 <div class="sk-child sk-double-bounce1"></div>
                                 <div class="sk-child sk-double-bounce2"></div>
                             </div>
+                            -->
+                            <div class="spinner" id="spinner1"></div>
+                            <div class="spinner" id="spinner2"></div>
                         </div>
                         <img id="image-art" class="image-art mb-3 mt-3 rounded centered" rawsrc="/static/DeepFeaturesApp/Images/{{ image_path }}" src="" width="224px" height="224px" hidden="hidden"/>
                     {% else %}
@@ -128,6 +132,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

@@ -1,0 +1,58 @@
+#loading-container {
+    min-height: 224px;
+    max-height: 224px;
+    position: relative;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+
+    top: 50%;
+    margin-top: -16px;
+    left: 50%;
+    border-radius: 25%;
+    position: absolute;
+}
+
+#spinner1 {
+    background: #222;
+    animation: rotating 3s linear infinite;
+    z-index: 885;
+}
+
+#spinner2 {
+    background: #fff;
+    animation: rotating 2s linear infinite 0.125s;
+    z-index: 886;
+}
+
+@keyframes rotating {
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
