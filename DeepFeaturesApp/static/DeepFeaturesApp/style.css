@@ -371,3 +371,16 @@
     -webkit-box-shadow: 0 0 0 0.2rem rgba(120,194,173,0.25);
     box-shadow: 0 0 0 0.2rem rgba(120,194,173,0.25);
 }
+
+footer {
+    padding-top: 10px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.footer-image {
+    padding: 10px;
+    width: 64px;
+    height: 64px;
+    left: 50%;
+}
