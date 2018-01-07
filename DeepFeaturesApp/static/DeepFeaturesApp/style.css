@@ -70,233 +70,238 @@
 }
 
 #layer1 {
-    width: 75px;
-    height: 75px;
-    margin-left: -38px;
+    width: 56px;
+    height: 56px;
+    margin-left: -28px;
     margin-top: 20px;
 }
 
 #connector1 {
-    margin-top: 95px;
+    margin-top: 76px;
 }
 
 #layer2 {
-    width: 75px;
-    height: 75px;
-    margin-left: -38px;
-    margin-top: 110px;
+    width: 56px;
+    height: 56px;
+    margin-left: -28px;
+    margin-top: 91px;
 }
 
 #connector2 {
-    margin-top: 185px;
+    margin-top: 147px;
 }
 
 #layer3 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
-    margin-top: 200px;
+    margin-top: 162px;
 }
 
 #connector3 {
-    margin-top: 237px;
+    margin-top: 199px;
 }
 
 #layer4 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
-    margin-top: 252px;
+    margin-top: 214px;
 }
 
 #connector4 {
-    margin-top: 289px;
+    margin-top: 251px;
 }
 
 #layer5 {
     width: 37px;
     height: 37px;
     margin-left: -19px;
-    margin-top: 304px;
+    margin-top: 266px;
 }
 #connector5 {
-    margin-top: 341px;
+    margin-top: 303px;
 }
 
 #layer6 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
-    margin-top: 356px;
+    margin-top: 318px;
 }
 #connector6 {
-    margin-top: 384px;
+    margin-top: 346px;
 }
 
 #layer7 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
-    margin-top: 399px;
+    margin-top: 361px;
 }
 
 #connector7 {
-    margin-top: 427px;
+    margin-top: 389px;
 }
 
 #layer8 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
-    margin-top: 442px;
+    margin-top: 404px;
 }
 
 #connector8 {
-    margin-top: 470px;
+    margin-top: 432px;
 }
 
 #layer9 {
     width: 28px;
     height: 28px;
     margin-left: -14px;
-    margin-top: 485px;
+    margin-top: 447px;
 }
 
 #connector9 {
-    margin-top: 513px;
+    margin-top: 475px;
 }
 
 #layer10 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
-    margin-top: 528px;
+    margin-top: 490px;
 }
 
 #connector10 {
-    margin-top: 548px;
+    margin-top: 510px;
 }
 
 #layer11 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
-    margin-top: 563px;
+    margin-top: 525px;
 }
 
 #connector11 {
-    margin-top: 583px;
+    margin-top: 545px;
 }
 
 #layer12 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
-    margin-top: 598px;
+    margin-top: 560px;
 }
 
 #connector12 {
-    margin-top: 618px;
+    margin-top: 580px;
 }
 
 #layer13 {
     width: 20px;
     height: 20px;
     margin-left: -10px;
-    margin-top: 633px;
+    margin-top: 595px;
 }
 
 #connector13 {
-    margin-top: 653px;
+    margin-top: 615px;
 }
 
 #layer14 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
-    margin-top: 668px;
+    margin-top: 630px;
 }
 
 #connector14 {
-    margin-top: 682px;
+    margin-top: 644px;
 }
 
 #layer15 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
-    margin-top: 697px;
+    margin-top: 659px;
 }
 
 #connector15 {
-    margin-top: 711px;
+    margin-top: 673px;
 }
 
 #layer16 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
-    margin-top: 726px;
+    margin-top: 688px;
 }
 
 #connector16 {
-    margin-top: 740px;
+    margin-top: 702px;
 }
 
 #layer17 {
     width: 14px;
     height: 14px;
     margin-left: -7px;
-    margin-top: 755px;
+    margin-top: 717px;
 }
 
 #connector17 {
-    margin-top: 769px;
+    margin-top: 731px;
 }
 
 #layer18 {
     width: 10px;
     height: 10px;
     margin-left: -5px;
-    margin-top: 784px;
+    margin-top: 746px;
 }
 
 #connector18 {
-    margin-top: 794px;
+    margin-top: 756px;
 }
 
 #layer19 {
     width: 75px;
     height: 20px;
     margin-left: -38px;
-    margin-top: 809px;
+    margin-top: 771px;
 }
 
 #connector19 {
-    margin-top: 829px;
+    margin-top: 791px;
 }
 
 #layer20 {
-    margin-top: 844px;
+    margin-top: 806px;
 }
 
 #connector20 {
-    margin-top: 853px;
+    margin-top: 815px;
 }
 
 #layer21 {
-    margin-top: 868px;
+    margin-top: 830px;
 }
 
 #connector21 {
-    margin-top: 877px;
+    margin-top: 839px;
 }
 
 #layer22 {
     width: 50px;
     height: 9px;
     margin-left: -25px;
-    margin-top: 892px;
+    margin-top: 854px;
+}
+
+#nn-container {
+    height: 863px;
+    position: relative;
 }
 
 #loading-icon {
