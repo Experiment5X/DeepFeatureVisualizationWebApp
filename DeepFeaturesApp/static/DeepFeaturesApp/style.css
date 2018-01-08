@@ -388,3 +388,7 @@ footer {
 .description-text {
     text-align: center;
 }
+
+#parameter-descriptions {
+    margin-top: 50px;
+}
