@@ -51,6 +51,7 @@ class ArtGenView(FormView):
             new_form.fields['layer_index'].initial = form.data['layer_index']
             new_form.fields['learning_rate'].initial = form.data['learning_rate']
             new_form.fields['total_variation'].initial = form.data['total_variation']
+            new_form.fields['noise_count'].initial = form.data['noise_count']
         else:
             new_form = form
 
@@ -61,7 +62,8 @@ class ArtGenView(FormView):
         params = feature_creations.ImageParameters(start_image, filename, form.cleaned_data['learning_rate'],
                                                    form.cleaned_data['layer_index'], form.cleaned_data['image_std_clip'],
                                                    form.cleaned_data['grad_std_clip'], form.cleaned_data['epoch_count'],
-                                                   form.cleaned_data['total_variation'])
+                                                   form.cleaned_data['total_variation'],
+                                                   form.cleaned_data['noise_count'])
 
         layer_index = int(form.cleaned_data['layer_index'])
         layers_selected = [False] * 22 # one for each layer

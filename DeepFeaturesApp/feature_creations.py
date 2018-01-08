@@ -18,7 +18,7 @@ def generate_image_name():
 
 class ImageParameters:
     def __init__(self, image, image_name, learning_rate, layer_index, image_std_clip, grad_std_clip, epochs,
-                 total_variation):
+                 total_variation, noise_count):
         self.image = image
         self.image_name = image_name
         self.learning_rate = learning_rate
@@ -27,6 +27,7 @@ class ImageParameters:
         self.grad_std_clip = grad_std_clip
         self.epochs = epochs
         self.total_variation = total_variation
+        self.noise_count = noise_count
 
 
 class AsyncImageFeatureCreator(threading.Thread):
@@ -40,9 +41,12 @@ class AsyncImageFeatureCreator(threading.Thread):
             image_instructions = images_to_make.get()
             feature_map = image_creator.get_feature_vector(image_instructions.image, image_instructions.layer_index)
             image = image_creator.create_from_features(feature_map, image_instructions.layer_index,
-                                                       image_instructions.learning_rate, image_instructions.grad_std_clip,
-                                                       image_instructions.image_std_clip, image_instructions.epochs,
-                                                       image_instructions.total_variation)
+                                                       learning_rate=image_instructions.learning_rate,
+                                                       grad_std_clip=image_instructions.grad_std_clip,
+                                                       img_std_clip=image_instructions.image_std_clip,
+                                                       epochs=image_instructions.epochs,
+                                                       total_variation=image_instructions.total_variation,
+                                                       noise_count=image_instructions.noise_count)
 
             cv2.imwrite(image_instructions.image_name, image)
             print('Wrote image')
@@ -65,8 +69,15 @@ class ImageFeatureCreator:
 
         return np.clip(x, x_min, x_max)
 
+    def random_noise(self, count):
+        noise = np.zeros((224, 224, 3))
+        for i in range(0, count):
+            noise[random.randint(0, 223), random.randint(0, 223), random.randint(0, 2)] = random.random() - 0.5
+
+        return noise
+
     def create_from_features(self, features, feature_layer_index, learning_rate=0.1, grad_std_clip=1.5,
-                             img_std_clip=3, epochs=500, verbose=False, total_variation=30):
+                             img_std_clip=3, epochs=500, total_variation=30, noise_count=50, verbose=False):
 
         # from https://github.com/keras-team/keras/blob/master/examples/neural_style_transfer.py
         def total_variation_loss(x, img_nrows=224, img_ncols=224):
@@ -90,21 +101,31 @@ class ImageFeatureCreator:
 
         # loss = K.sum(K.abs(feature_vector - features) + edge_h_penalty + edge_v_penalty)
         total_variation_node = total_variation_loss(input_img)
+        print('Total variation coeff: ' + str(total_variation))
         loss = K.sum(K.abs(feature_vector - features)) + total_variation * total_variation_node
 
         gradient = K.gradients(loss, input_img)[0]
         iterate = K.function([input_img], [loss, gradient, total_variation_node])
+        # iterate = K.function([input_img], [loss, gradient])
+
+        print('Before random noise: '+ str(noise_count))
+        random_noise = self.random_noise(noise_count)
+        print('Done')
 
         start_image = np.random.rand(1, 224, 224, 3)
         for i in range(0, epochs):
-            l, grad, total_var = iterate([start_image])
+            l, grad, tot_var = iterate([start_image])
 
             grad_clipped = self.clip_by_std(grad, grad_std_clip)
             grad_normalized = (grad_clipped - np.min(grad_clipped))
             grad_normalized /= np.max(grad_normalized)
 
-            start_image += learning_rate * (-grad_normalized)
+            start_image += learning_rate * (-grad_normalized + random_noise)
             start_image = self.clip_by_std(start_image, img_std_clip)
+
+            # print('Before random noise')
+            random_noise = self.random_noise(noise_count)
+            # print('Done')
 
             # in the very beginning and at the very end don't blur the image
             if int(epochs * 0.07) < i < int(epochs * 0.93):
@@ -122,7 +143,7 @@ class ImageFeatureCreator:
                 i /= 15
 
             # if verbose:
-            #     print('Epoch ' + str(i) + ': Loss = ' + str(l) + ': Total Variation: ' + str(total_var))
+            # print('Epoch ' + str(i) + ': Loss = ' + str(l) + ': Total Variation: ')
 
         # normalize to between 0 and 255
         start_image -= start_image.min()
