@@ -384,3 +384,7 @@ footer {
     height: 64px;
     left: 50%;
 }
+
+.description-text {
+    text-align: center;
+}

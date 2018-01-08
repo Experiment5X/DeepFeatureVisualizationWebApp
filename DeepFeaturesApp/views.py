@@ -18,6 +18,13 @@ class ArtGenView(FormView):
     template_name = 'DeepFeaturesApp/index.html'
     form_class = DeepFeatureForm
 
+    def get_original_image_path(self, request):
+        if 'custom_image' in request.session:
+            return request.session['custom_image']
+        else:
+            return './DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg'
+
+
     def get(self, request):
         form = DeepFeatureForm()
         history = []
@@ -27,6 +34,8 @@ class ArtGenView(FormView):
         layers_selected = [False] * 22
         layers_selected[1] = True
         return render(request, 'DeepFeaturesApp/index.html', {'form': form,
+                                                              'original_image_path':
+                                                                  self.get_original_image_path(request)[17:],
                                                               'history': prepare_histories(history),
                                                               'layers_selected': layers_selected})
 
@@ -45,10 +54,7 @@ class ArtGenView(FormView):
         else:
             new_form = form
 
-        if 'custom_image' in request.session:
-            original_image_path = request.session['custom_image']
-        else:
-            original_image_path = './DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg'
+        original_image_path = self.get_original_image_path(request)
         start_image = cv2.resize(cv2.imread(original_image_path), (224, 224))
 
         filename = feature_creations.generate_image_name()

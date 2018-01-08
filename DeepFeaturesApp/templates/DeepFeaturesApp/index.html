@@ -63,19 +63,15 @@
                 <div class="col-6">
                     {% if image_path %}
                         <div id="loading-container">
-                            <!--
-                            <div id="loading-icon" class="sk-double-bounce">
-                                <div class="sk-child sk-double-bounce1"></div>
-                                <div class="sk-child sk-double-bounce2"></div>
-                            </div>
-                            -->
                             <div class="spinner" id="spinner1"></div>
                             <div class="spinner" id="spinner2"></div>
                         </div>
                         <img id="image-art" class="image-art mb-3 mt-3 rounded centered" rawsrc="/static/DeepFeaturesApp/Images/{{ image_path }}" src="" width="224px" height="224px" hidden="hidden"/>
                     {% else %}
-                        <h3 class="text-center">Create a Visualization</h3>
-                        <h6 class="text-center">Edit the parameters to get started</h6>
+                        <h3 class="text-center">Visualize a Feature Map</h3>
+                        <img id="image-art" class="image-art mb-3 mt-3 rounded centered" src="{{ original_image_path }}" width="224px" height="224px"/>
+                        <p class="description-text">Visualize a feature map in VGG16 by creating an image with a feature map close to the input image's.
+                            Select the layer on the left and edit the parameters below.</p>
                     {% endif %}
                     <form id="image-gen-form" action="/" method="post">
                         {% csrf_token %}
