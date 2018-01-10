@@ -376,6 +376,7 @@ footer {
     padding-top: 10px;
     padding-bottom: 25px;
     text-align: center;
+    background: #444444;
 }
 
 .footer-image {
@@ -383,6 +384,10 @@ footer {
     width: 64px;
     height: 64px;
     left: 50%;
+}
+
+.footer-text {
+    color: #ffffff;
 }
 
 .description-text {
