@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    {% for hist in history %}
+                    {% for hist in history.1 %}
                         <div class="card history-card">
                             <div class="card-img-top">
                                 <div class="preview" style="background-image: url(&quot;{{ hist.filename }}&quot;)" alt="Previous feature visualization">
@@ -150,9 +150,9 @@
                             </div>
                         </div>
                     {% endfor %}
-                    {% if history %}
+                    {% if history.1 %}
                         <div class="text-center">
-                            <a href="/history" class="btn btn-info mt-2">See All {{ history|length }} Images</a>
+                            <a href="/history" class="btn btn-info mt-2">See All {{ history.0 }} Images</a>
                         </div>
                     {% endif %}
                 </div>
