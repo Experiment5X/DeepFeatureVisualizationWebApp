@@ -79,6 +79,10 @@ class ImageFeatureCreator:
     def create_from_features(self, features, feature_layer_index, learning_rate=0.1, grad_std_clip=1.5,
                              img_std_clip=3, epochs=500, total_variation=30, noise_count=50, verbose=False):
 
+        # the total number of values in the
+        feature_vector = self.model.layers[feature_layer_index].output
+        value_count = K.cast(K.prod(K.shape(feature_vector)), dtype='float32')
+
         # from https://github.com/keras-team/keras/blob/master/examples/neural_style_transfer.py
         def total_variation_loss(x, img_nrows=224, img_ncols=224):
             assert K.ndim(x) == 4
@@ -88,11 +92,11 @@ class ImageFeatureCreator:
             else:
                 a = K.square(x[:, :img_nrows - 1, :img_ncols - 1, :] - x[:, 1:, :img_ncols - 1, :])
                 b = K.square(x[:, :img_nrows - 1, :img_ncols - 1, :] - x[:, :img_nrows - 1, 1:, :])
+
+            # scale by the value count so the coefficent will be same for different sized layers
             return K.sum(K.pow(a + b, 1.25))
 
         input_img = self.model.input
-
-        feature_vector = self.model.layers[feature_layer_index].output
 
         # edge_h_kernel = K.variable([[1, 0, -1], [2, 0, -2], [1, 0, -1]])
         # edge_v_kernel = K.variable([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
@@ -102,7 +106,7 @@ class ImageFeatureCreator:
         # loss = K.sum(K.abs(feature_vector - features) + edge_h_penalty + edge_v_penalty)
         total_variation_node = total_variation_loss(input_img)
         print('Total variation coeff: ' + str(total_variation))
-        loss = K.sum(K.abs(feature_vector - features)) + total_variation * total_variation_node
+        loss = K.sum(K.abs(feature_vector - features)) / value_count + total_variation * total_variation_node
 
         gradient = K.gradients(loss, input_img)[0]
         iterate = K.function([input_img], [loss, gradient, total_variation_node])
