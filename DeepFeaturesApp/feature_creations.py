@@ -49,7 +49,6 @@ class AsyncImageFeatureCreator(threading.Thread):
                                                        noise_count=image_instructions.noise_count)
 
             cv2.imwrite(image_instructions.image_name, image)
-            print('Wrote image')
 
 
 class ImageFeatureCreator:
@@ -98,23 +97,13 @@ class ImageFeatureCreator:
 
         input_img = self.model.input
 
-        # edge_h_kernel = K.variable([[1, 0, -1], [2, 0, -2], [1, 0, -1]])
-        # edge_v_kernel = K.variable([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
-        # edge_h_penalty = K.sum(K.conv2d(input_image, edge_h_kernel))
-        # edge_v_penalty = K.sum(K.conv2d(input_image, edge_v_kernel))
-
-        # loss = K.sum(K.abs(feature_vector - features) + edge_h_penalty + edge_v_penalty)
         total_variation_node = total_variation_loss(input_img)
-        print('Total variation coeff: ' + str(total_variation))
         loss = K.sum(K.abs(feature_vector - features)) / value_count + total_variation * total_variation_node
 
         gradient = K.gradients(loss, input_img)[0]
         iterate = K.function([input_img], [loss, gradient, total_variation_node])
-        # iterate = K.function([input_img], [loss, gradient])
 
-        print('Before random noise: '+ str(noise_count))
         random_noise = self.random_noise(noise_count)
-        print('Done')
 
         start_image = np.random.rand(1, 224, 224, 3)
         for i in range(0, epochs):
@@ -127,9 +116,7 @@ class ImageFeatureCreator:
             start_image += learning_rate * (-grad_normalized + random_noise)
             start_image = self.clip_by_std(start_image, img_std_clip)
 
-            # print('Before random noise')
             random_noise = self.random_noise(noise_count)
-            # print('Done')
 
             # in the very beginning and at the very end don't blur the image
             if int(epochs * 0.07) < i < int(epochs * 0.93):

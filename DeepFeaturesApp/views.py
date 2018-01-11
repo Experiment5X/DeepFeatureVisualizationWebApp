@@ -24,7 +24,6 @@ class ArtGenView(FormView):
         else:
             return './DeepFeaturesApp/static/DeepFeaturesApp/pineapple.jpg'
 
-
     def get(self, request):
         form = DeepFeatureForm()
         history = []
