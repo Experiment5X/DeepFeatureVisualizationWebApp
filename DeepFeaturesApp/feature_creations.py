@@ -76,7 +76,7 @@ class ImageFeatureCreator:
         return noise
 
     def create_from_features(self, features, feature_layer_index, learning_rate=0.1, grad_std_clip=1.5,
-                             img_std_clip=3, epochs=500, total_variation=30, noise_count=50, verbose=False):
+                             img_std_clip=3, epochs=250, total_variation=0, noise_count=0, verbose=False):
 
         # the total number of values in the
         feature_vector = self.model.layers[feature_layer_index].output
